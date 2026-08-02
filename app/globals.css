@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design Tokens ────────────────────────────────── */
+:root {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --border-color: rgba(148,163,184,0.2);
+  --glass-bg: rgba(255,255,255,0.7);
+  --glass-border: rgba(255,255,255,0.5);
+  --card-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
+}
+
+.dark {
+  --bg-primary: #0a0f1e;
+  --bg-secondary: #0d1425;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --border-color: rgba(148,163,184,0.08);
+  --glass-bg: rgba(15,23,42,0.6);
+  --glass-border: rgba(255,255,255,0.06);
+  --card-shadow: 0 4px 24px 0 rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+/* ── Base Styles ──────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ── Scrollbar ────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148,163,184,0.3);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148,163,184,0.5);
+}
+
+/* ── Glassmorphism ────────────────────────────────── */
+@layer components {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--card-shadow);
+    border-radius: 16px;
+  }
+
+  .glass-dark {
+    background: rgba(10,15,30,0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+
+  /* ── Shimmer Skeleton ───────────────────────────── */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      rgba(148,163,184,0.1) 25%,
+      rgba(148,163,184,0.2) 50%,
+      rgba(148,163,184,0.1) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  .dark .skeleton {
+    background: linear-gradient(
+      90deg,
+      rgba(30,41,59,0.8) 25%,
+      rgba(51,65,85,0.8) 50%,
+      rgba(30,41,59,0.8) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* ── Category Color Map ─────────────────────────── */
+  .cat-cardiology   { --cat-from: #f43f5e; --cat-to: #ec4899; }
+  .cat-oncology     { --cat-from: #8b5cf6; --cat-to: #7c3aed; }
+  .cat-neurology    { --cat-from: #06b6d4; --cat-to: #0ea5e9; }
+  .cat-immunology   { --cat-from: #10b981; --cat-to: #14b8a6; }
+  .cat-pharmacology { --cat-from: #f59e0b; --cat-to: #f97316; }
+  .cat-genetics     { --cat-from: #84cc16; --cat-to: #22c55e; }
+  .cat-surgery      { --cat-from: #ef4444; --cat-to: #f97316; }
+  .cat-pediatrics   { --cat-from: #ec4899; --cat-to: #a855f7; }
+  .cat-default      { --cat-from: #0ea5e9; --cat-to: #14b8a6; }
+
+  .cat-badge {
+    background: linear-gradient(135deg, var(--cat-from), var(--cat-to));
+  }
+
+  /* ── Gradient Text ──────────────────────────────── */
+  .gradient-text {
+    background: linear-gradient(135deg, #0ea5e9, #14b8a6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-warm {
+    background: linear-gradient(135deg, #f43f5e, #f97316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Hover Card ─────────────────────────────────── */
+  .news-card {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease;
+  }
+  .news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px -12px rgba(14,165,233,0.2);
+  }
+  .dark .news-card:hover {
+    box-shadow: 0 20px 60px -12px rgba(6,182,212,0.25);
+  }
+
+  /* ── Gradient Section Divider ───────────────────── */
+  .section-accent {
+    height: 3px;
+    width: 48px;
+    background: linear-gradient(90deg, #0ea5e9, #14b8a6);
+    border-radius: 999px;
+  }
+}
+
+/* ── Utility Extensions ───────────────────────────── */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%  { transform: translateY(-15px) rotate(2deg); }
+  66%  { transform: translateY(-8px) rotate(-1deg); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50%  { opacity: 0.6; transform: scale(1.08); }
+}
